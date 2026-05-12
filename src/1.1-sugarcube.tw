@@ -1,0 +1,215 @@
+/* PassageReady -> PassageHeader -> PASSAGE -> PassageFooter -> PassageDone */
+
+:: PassageReady [PassageReady nobr] {"position":"100,1350","size":"100,100"}
+<<if passage() isnot "Start">>
+	<<UpdateCheck>>
+	<<StatReset>>
+	<<GetTimeInfo>>
+	<<GenderCheck>>
+	<<GetGameState>>
+	<<if $Chapter > 0 or visited("Intro-ChapterStart")>>
+		<<HornyCheckValue>>
+	<</if>>
+
+	<<set _dbgC = $c, _dbgC2 = $c2>>
+
+	<<if not $UseDoseCD>>
+		<<if $mom.doseCD > 1>>
+			<<set $mom.doseCD to 1>>
+		<</if>>
+		<<if $sister.doseCD > 1>>
+			<<set $sister.doseCD to 1>>
+		<</if>>
+		<<if $sophie.doseCD > 1>>
+			<<set $sophie.doseCD to 1>>
+		<</if>>
+		<<if $tasha.doseCD > 1>>
+			<<set $tasha.doseCD to 1>>
+		<</if>>
+		<<if $diana.doseCD > 1>>
+			<<set $diana.doseCD to 1>>
+		<</if>>
+		<<if $julia.doseCD > 1>>
+			<<set $julia.doseCD to 1>>
+		<</if>>
+	<</if>>
+	<<updatebar>>
+	<<unset $SceneCredit>>
+
+	<<if $ShowImages and $ShowWeather>>
+		<<if $story.halloweenEventActive>>
+			<<addclass "body" "bg_redalert">>
+		<<elseif isMorning()>>
+			<<addclass "body" "bg_morning">>
+		<<elseif isLateMorning()>>
+			<<addclass "body" "bg_latemorning">>
+		<<elseif isNoon()>>
+			<<addclass "body" "bg_noon">>
+		<<elseif isEarlyAfternoon()>>
+			<<addclass "body" "bg_earlyafternoon">>
+		<<elseif isAfternoon()>>
+			<<addclass "body" "bg_afternoon">>
+		<<elseif isEvening()>>
+			<<addclass "body" "bg_evening">>
+		<<elseif isNight()>>
+			<<addclass "body" "bg_night">>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: PassageDone [PassageDone nobr] {"position":"1100,1225","size":"100,100"}
+<<if passage() isnot "Start">>
+	<<UpdateCheck>>
+	<<StatReset>>
+	<<GenderCheck>>
+	<<EventsCheck>>
+	<<DreamCheck>>
+	<<if $Chapter > 0 or visited("Intro-ChapterStart")>>
+		<<HornyCheckValue>>
+	<</if>>
+	<<set $NoStaticEvent to false>>
+	<<set $c = 0,$c2 = 0>>
+	<<set $EVENT to [], $EVENTR to 0>>
+	<<set $PNAME to $player.name>>
+	<<set $achievementTrigger to false>>
+	<<updatebar>>
+<</if>>
+
+
+:: PassageHeader [PassageHeader nobr] {"position":"1225,1225","size":"100,100"}
+<<if passage() isnot "Start">>
+    /* Beginner Chemist - Make MCS-1 */
+    <<if $serum[1].qty > 0>>
+        <<achieve 1>>
+    <</if>>
+
+    /* Intermediate Chemist - Make MCS-2 */
+    <<if $serum[2].qty > 0>>
+        <<achieve 2>>
+    <</if>>
+
+    /* Advanced Chemist - Make MCS-3 */
+    <<if $serum[3].qty > 0>>
+        <<achieve 3>>
+    <</if>>
+
+    /* Bad Ender - Make MCS-X */
+    <<if $serum[7].qty > 0>>
+        <<achieve 4>>
+    <</if>>
+
+    /* Complete Chapter 1 */
+    <<if $Chapter > 1>>
+        <<achieve 5>>
+    <</if>>
+
+    /* Complete Chapter 2 */
+    <<if $Chapter > 2>>
+        <<achieve 6>>
+    <</if>>
+
+    /* Complete Chapter 3 */
+    <<if $Chapter > 3>>
+        <<achieve 15>>
+    <</if>>
+
+    /* Create CMD-1 in Chapter 1 */
+    <<if $Tasks[1].complete>>
+        <<achieve 7>>
+    <</if>>
+
+    /* Dose Ava */
+    <<if $mom.dose > 0>>
+        <<achieve 8>>
+    <</if>>
+
+    /* Dose Dakota */
+    <<if $sister.dose > 0>>
+        <<achieve 9>>
+    <</if>>
+
+    /* Dose Penny */
+    <<if $penny.dose > 0>>
+        <<achieve 10>>
+    <</if>>
+
+    /* Dose Tasha */
+    <<if $tasha.dose > 0>>
+        <<achieve 11>>
+    <</if>>
+
+    /* Dose Diana */
+    <<if $diana.dose > 0>>
+        <<achieve 12>>
+    <</if>>
+
+    /* Dose John */
+    <<if $john.dose > 0>>
+        <<achieve 13>>
+    <</if>>
+
+    /* John Doses You */
+    <<if $john.isDom>>
+        <<achieve 14>>
+    <</if>>
+
+    /* Unlock AmazingAss Trait */
+    <<if tracked($player,"analFuck.get",10)>>
+        <<achieve 16>>
+    <</if>>
+
+    /* Unlock Oral Master Trait */
+    <<if tracked($player,"oral",20)>>
+        <<achieve 17>>
+    <</if>>
+
+    /* Unlock Oral Fanatic Trait */
+    <<if tracked($player,"oral",40)>>
+        <<achieve 18>>
+    <</if>>
+
+    /* Unlock Bimbo Trait */
+    <<if $player.daysBimbo >= 10>>
+        <<achieve 19>>
+    <</if>>
+
+    /* Unlock Masculinity Lover Trait */
+    <<if tracked($player,"sexMen",10)>>
+        <<achieve 20>>
+    <</if>>
+
+    /* Unlock Femininity Lover Trait */
+    <<if tracked($player,"sexWomen",10)>>
+        <<achieve 21>>
+    <</if>>
+
+    /* Unlock Androgyny Lover Trait */
+    <<if tracked($player,"sexTrans",10)>>
+        <<achieve 22>>
+    <</if>>
+
+    /* Unlock Premature Trait */
+    <<if $player.cumSelf > 5>>
+        <<achieve 23>>
+    <</if>>
+
+    /* Unlock Efficient Trait */
+    <<if $player.cumBoth > 5>>
+        <<achieve 24>>
+    <</if>>
+
+    /* Unlock Fertile Trait */
+    <<if $player.tryPregnant > 5>>
+        <<achieve 25>>
+    <</if>>
+
+    /* Unlock Bloodlust Trait */
+    <<if tracked($player,"sexFamily",5)>>
+        <<achieve 26>>
+    <</if>>
+
+    /* Failed to Save Jag */
+    <<if timeIsAfter(20171219) and not flag($player,"HelpedJag")>>
+        <<achieve 30>>
+    <</if>>
+<</if>>
