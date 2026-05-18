@@ -138,5 +138,19 @@ SugarCube.setup.clUnderwear = {
         "shoes":"",
         "store":"",
         "cost":0
+    },
+    "see-through-panties":{
+        "name":"See-Through Panties",
+        "id":"see-through-panties",
+        "dir":"un_seethrough-panties",
+        "img":["base","base","bulge","bulge","bulge","bulge"],
+        "tags":["dominant","slutty","girly"],
+        "main":"panties",
+        "top":"",
+        "bottom":"see-through panties",
+        "socks":"",
+        "shoes":"",
+        "store":"intimate",
+        "cost":0
     }
 };
